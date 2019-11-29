@@ -102,6 +102,7 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
             ItemAetheriumAshenCloak cloak = (ItemAetheriumAshenCloak) armor.getItem();
             return cloak.isBroken(armor);
         }
+        //return false; //this doesnt work
         return false;
     }
 
@@ -127,12 +128,12 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 	@Override
 	public boolean shouldDisplayInfo(EntityPlayer arg0, ItemStack arg1, EntityEquipmentSlot arg2) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public float getTotalDamageResistance(EntityLivingBase arg0, DamageSource arg1, ItemStack arg2) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 }
