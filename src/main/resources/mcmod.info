@@ -1,13 +1,13 @@
 [
 {
   "modid": "aetheriumashenarmor",
-  "name": "Aetherium Ashen Armor,
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "name": "Aetherium Ashen Armor",
+  "description": "Extension mod for Embers Rekindled and Aetherworks. Creates a new tier of armor with the powers of the Embers Rekindled Ashen Cloak using the materials gathered in Aetherworks.",
+  "version": "${1.0}",
+  "mcversion": "${1.12.2}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
+  "authorList": ["tyon2006"],
   "credits": "The Forge and FML guys, for making this example",
   "logoFile": "",
   "screenshots": [],

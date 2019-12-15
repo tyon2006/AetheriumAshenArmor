@@ -1,25 +1,39 @@
 package com.aetheriumashenarmor.items;
 
+import java.util.List;
+import java.util.Objects;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamroots.embers.api.event.EmberRemoveEvent;
 import teamroots.embers.api.item.IInflictorGem;
 import teamroots.embers.api.item.IInflictorGemHolder;
 import teamroots.embers.api.item.IInfoGoggles;
-import teamroots.embers.model.ModelAshenCloak;
 
+import teamroots.embers.model.ModelAshenCloak;
+import v0id.aw.AetherWorks;
+
+@Mod.EventBusSubscriber
 public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictorGemHolder, IInfoGoggles, ISpecialArmor {
 
 	public ItemAetheriumAshenCloak(ArmorMaterial material, int reduction, EntityEquipmentSlot slot) {
-		super(material, reduction, slot, "ashen_cloak", true);
+		super(material, reduction, slot, "aetherium_ashen_cloak", true);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -78,10 +92,14 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 	public ItemStack[] getAttachedGems(ItemStack holder) { //Potentially default???
 		ItemStack[] stacks = new ItemStack[getGemSlots(holder)];
 		for(int i = 1; i <= stacks.length; i++) {
-			if(holder.hasTagCompound())
-				stacks[i-1] = new ItemStack(holder.getTagCompound().getCompoundTag("gem"+i));
-			else
+			if(holder.hasTagCompound()) {
+				stacks[i-1] = new ItemStack(holder.getTagCompound().getCompoundTag("gem"+i) );
+				System.out.println("no tags found");
+			}
+			else {
 				stacks[i-1] = ItemStack.EMPTY;
+			System.out.println("no tags found");	
+			}
 		}
 		return stacks;
 	}
@@ -95,45 +113,104 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 		return armor.getItemDamage() >= armor.getMaxDamage() - 1;
 	}
 
-    private boolean isProtectiveCloakPiece(ItemStack armor)
+    private static boolean isProtectiveCloakPiece(ItemStack armor)
     {
         if(armor.getItem() instanceof ItemAetheriumAshenCloak)
         {
             ItemAetheriumAshenCloak cloak = (ItemAetheriumAshenCloak) armor.getItem();
-            return cloak.isBroken(armor);
+            return !cloak.isBroken(armor);
         }
-        //return false; //this doesnt work
         return false;
+
     }
 
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage,
 			int slot) {
-		// TODO Auto-generated method stub
-		return null;
+		ArmorProperties prop = new ArmorProperties(0,0,Integer.MAX_VALUE);
+		if(!isBroken(armor)) {
+			prop.Armor = damageReduceAmount;
+			prop.Toughness = toughness;
+		}
+		return prop;
 	}
 
 	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
 	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean shouldDisplayInfo(EntityPlayer arg0, ItemStack arg1, EntityEquipmentSlot arg2) {
-		// TODO Auto-generated method stub
-		return true;
+		return arg2 == EntityEquipmentSlot.HEAD;
 	}
 
 	@Override
-	public float getTotalDamageResistance(EntityLivingBase arg0, DamageSource arg1, ItemStack arg2) {
-		// TODO Auto-generated method stub
-		return 1;
+	public float getTotalDamageResistance (EntityLivingBase arg0, DamageSource arg1, ItemStack arg2) {
+		
+		float reduction = 0;
+
+		if (isProtectiveCloakPiece(arg0.getItemStackFromSlot(EntityEquipmentSlot.HEAD)) &&
+                isProtectiveCloakPiece(arg0.getItemStackFromSlot(EntityEquipmentSlot.CHEST)) &&
+                isProtectiveCloakPiece(arg0.getItemStackFromSlot(EntityEquipmentSlot.LEGS)) &&
+                isProtectiveCloakPiece(arg0.getItemStackFromSlot(EntityEquipmentSlot.FEET))) {
+			for (ItemStack stack : getAttachedGems(arg2)) {
+				System.out.println("for loop");	
+				Item item = stack.getItem();
+				System.out.println(item);
+				if (item instanceof IInflictorGem && Objects.equals(((IInflictorGem) item).getAttunedSource(stack), arg1.getDamageType())) {
+					reduction += ((IInflictorGem) item).getDamageResistance(stack, reduction);
+					System.out.println("if inner loop");
+				}
+			}
+		}
+
+		return reduction;
+		//return 0;
 	}
+	
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    {
+        tooltip.add(AetherWorks.proxy.translate("aw.enchantment.aetherid", "II"));
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+    
+    @Override
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+    {
+        if (!worldIn.isRemote)
+        {
+            if (stack.getItemDamage() > 0 && worldIn.getWorldTime() % 24000 >= 15000 && worldIn.getWorldTime() % 24000 <= 21000 && worldIn.canBlockSeeSky(entityIn.getPosition().up()))
+            {
+                if (worldIn.rand.nextFloat() <= 0.05F)
+                {
+                    stack.setItemDamage(stack.getItemDamage() - 1);
+                }
+            }
+        }
+
+        super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+    }
+	
+	@SubscribeEvent
+	public static void onTake(EmberRemoveEvent event){
+		System.out.println("SUBSCRIPTION TRIGGER SUCCESS");
+		
+		if (isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.HEAD)) &&
+                isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.CHEST)) &&
+                isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.LEGS)) &&
+                isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.FEET))) {
+			
+			System.out.println("ARMOR REDUCTION");	
+			event.addReduction(0.15);
+			
+			}
+		}
 }
