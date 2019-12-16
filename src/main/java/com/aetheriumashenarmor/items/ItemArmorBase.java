@@ -34,8 +34,8 @@ public class ItemArmorBase extends ItemArmor implements IModeledItem {
 		this.setMaxStackSize(1);
 
 		
-		setRegistryName("AetheriumAshenArmor:"+getUnlocalizedName().substring(5));
-		System.out.println("AetheriumAshenArmor:"+getUnlocalizedName().substring(5));
+		setRegistryName("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
+		System.out.println("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
 		if (addToTab){
 			setCreativeTab(CreativeTabs.COMBAT);
 		}

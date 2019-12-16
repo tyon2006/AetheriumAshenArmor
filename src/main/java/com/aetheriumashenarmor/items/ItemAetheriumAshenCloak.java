@@ -201,14 +201,12 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 	
 	@SubscribeEvent
 	public static void onTake(EmberRemoveEvent event){
-		System.out.println("SUBSCRIPTION TRIGGER SUCCESS");
 		
 		if (isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.HEAD)) &&
                 isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.CHEST)) &&
                 isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.LEGS)) &&
                 isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.FEET))) {
-			
-			System.out.println("ARMOR REDUCTION");	
+				
 			event.addReduction(0.15);
 			
 			}
