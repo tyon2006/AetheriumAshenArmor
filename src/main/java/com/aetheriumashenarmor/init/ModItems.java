@@ -18,7 +18,7 @@ import com.aetheriumashenarmor.items.*;
 public class ModItems {
 
 	public static final ArmorMaterial ARMOR_MATERIAL_AETHERIUM = EnumHelper.addArmorMaterial("armor_material_aetherium", "aw:ingot_aether", 
-			15, new int[] {5, 5, 5, 5}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0f);
+			15, new int[] {4, 6, 8, 4}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2.0f);
 	
 	public static final Item AETHERIUM_ASHEN_BOOTS = new ItemAetheriumAshenCloak(ARMOR_MATERIAL_AETHERIUM, 1, EntityEquipmentSlot.FEET);
 	public static final Item AETHERIUM_ASHEN_HELMET = new ItemAetheriumAshenCloak(ARMOR_MATERIAL_AETHERIUM, 1, EntityEquipmentSlot.HEAD);

@@ -32,6 +32,8 @@ public class ItemArmorBase extends ItemArmor implements IModeledItem {
 			break;
 		}
 		this.setMaxStackSize(1);
+		
+		this.
 
 		
 		setRegistryName("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
