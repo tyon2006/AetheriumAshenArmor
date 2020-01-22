@@ -2,6 +2,7 @@ package com.aetheriumashenarmor.items;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -15,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.fml.common.Mod;
@@ -191,11 +193,14 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
             {
                 if (worldIn.rand.nextFloat() <= 0.05F)
                 {
+                	BlockPos pos = entityIn.getPosition();
+                	Random rand = new Random();
                     stack.setItemDamage(stack.getItemDamage() - 1);
+                    v0id.aw.AetherWorks.proxy.spawnParticleSpark(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + rand.nextFloat(), pos.getZ() + rand.nextFloat(), (rand.nextFloat() - rand.nextFloat()) / 20, rand.nextFloat() / 20, (rand.nextFloat() - rand.nextFloat()) / 20, 0, 0.72F, 0.95F, 1 + rand.nextFloat(), 60);
+                    
                 }
             }
         }
-
         super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
     }
 	
