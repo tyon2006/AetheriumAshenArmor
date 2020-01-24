@@ -3,7 +3,7 @@
 		"modid": "aetheriumashenarmor",
 		"name": "Aetherium Ashen Armor",
 		"description": "Extension to Embers Rekindled and Aetherworks. Adds new armor by infusing the Ashen Cloak armor set with Aetherium Gas.",
-		"version": "1.0",
+		"version": "1.0.1",
 		"mcversion": "1.12.2",
 		"authorList": [
 			"tyon2006"
