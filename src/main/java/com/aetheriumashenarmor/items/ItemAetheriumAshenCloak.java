@@ -96,11 +96,11 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 		for(int i = 1; i <= stacks.length; i++) {
 			if(holder.hasTagCompound()) {
 				stacks[i-1] = new ItemStack(holder.getTagCompound().getCompoundTag("gem"+i) );
-				System.out.println("no tags found");
+				//System.out.println("no tags found");
 			}
 			else {
 				stacks[i-1] = ItemStack.EMPTY;
-			System.out.println("no tags found");	
+			//System.out.println("no tags found");	
 			}
 		}
 		return stacks;
@@ -163,12 +163,12 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
                 isProtectiveCloakPiece(arg0.getItemStackFromSlot(EntityEquipmentSlot.LEGS)) &&
                 isProtectiveCloakPiece(arg0.getItemStackFromSlot(EntityEquipmentSlot.FEET))) {
 			for (ItemStack stack : getAttachedGems(arg2)) {
-				System.out.println("for loop");	
+				//System.out.println("for loop");	
 				Item item = stack.getItem();
-				System.out.println(item);
+				//System.out.println(item);
 				if (item instanceof IInflictorGem && Objects.equals(((IInflictorGem) item).getAttunedSource(stack), arg1.getDamageType())) {
 					reduction += ((IInflictorGem) item).getDamageResistance(stack, reduction);
-					System.out.println("if inner loop");
+					//System.out.println("if inner loop");
 				}
 			}
 		}

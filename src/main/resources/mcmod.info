@@ -8,6 +8,10 @@
 		"authorList": [
 			"tyon2006"
 		],
+		"dependencies": [
+			"embers-rekindled",
+			"baubles"
+		],
 		"credits": "BordListian for all the support and development of Embers Rekindled, and v0idwa1k3r for the development of Aetherworks."
 	}
 ]

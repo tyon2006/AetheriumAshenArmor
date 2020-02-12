@@ -18,12 +18,14 @@ public class NBTItemStampingRecipe extends ItemStampingRecipe{
 	public ItemStack getResult(TileEntity tile, ItemStack input, FluidStack fluid, ItemStack stamp) {		
 		
 		NBTTagCompound newTag = null;
+		ItemStack resultNBT = this.result.copy();
+		
 		
 		if(input.hasTagCompound()) {
 		    newTag = input.getTagCompound().copy();
-			this.result.setTagCompound(newTag);
-			return this.result;
+			resultNBT.setTagCompound(newTag);
+			return resultNBT;
 		}
-		return this.result;
+		return resultNBT;
 	}
 }
