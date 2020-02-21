@@ -6,6 +6,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import teamroots.embers.recipe.ItemStampingRecipe;
 
+
+
 public class NBTItemStampingRecipe extends ItemStampingRecipe{
 
 	public NBTItemStampingRecipe(Ingredient input, FluidStack fluid, Ingredient stamp, ItemStack result) {
@@ -17,6 +19,7 @@ public class NBTItemStampingRecipe extends ItemStampingRecipe{
 		
 		NBTTagCompound newTag = null;
 		ItemStack resultNBT = this.result.copy();
+		
 		
 		if(input.hasTagCompound()) {
 		    newTag = input.getTagCompound().copy();

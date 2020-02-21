@@ -33,11 +33,8 @@ public class ItemArmorBase extends ItemArmor implements IModeledItem {
 		}
 		this.setMaxStackSize(1);
 		
-		this.
-
-		
-		setRegistryName("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
-		System.out.println("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
+		this.setRegistryName("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
+		//System.out.println("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
 		if (addToTab){
 			setCreativeTab(CreativeTabs.COMBAT);
 		}
@@ -46,6 +43,7 @@ public class ItemArmorBase extends ItemArmor implements IModeledItem {
 	public void initModel(){
 		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(),"inventory"));
 	}
+	
 	
 }
 

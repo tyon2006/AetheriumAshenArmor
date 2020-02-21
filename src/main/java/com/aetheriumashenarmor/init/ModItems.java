@@ -42,5 +42,5 @@ public class ModItems {
         ((ItemArmorBase) AETHERIUM_ASHEN_BOOTS).initModel();
 	}
 
-	
+
 }

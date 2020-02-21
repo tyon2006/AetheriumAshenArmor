@@ -60,6 +60,7 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 		return gem.getItem() instanceof IInflictorGem;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void attachGem(ItemStack holder, ItemStack gem, int slot) {
 		if (!holder.hasTagCompound()) {
@@ -106,10 +107,12 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 		return stacks;
 	}
 
+	/*
 	@Override
 	public void setDamage(ItemStack stack, int damage) {
 		super.setDamage(stack, Math.min(damage,getMaxDamage(stack) - 1));
 	}
+	*/
 
 	private boolean isBroken(ItemStack armor) {
 		return armor.getItemDamage() >= armor.getMaxDamage() - 1;
@@ -177,6 +180,7 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 		//return 0;
 	}
 	
+	@SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
@@ -184,25 +188,25 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
     
+	//@SideOnly(Side.CLIENT) //does this need to be here for this method? iunno
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-    {
-        if (!worldIn.isRemote)
-        {
-            if (stack.getItemDamage() > 0 && worldIn.getWorldTime() % 24000 >= 15000 && worldIn.getWorldTime() % 24000 <= 21000 && worldIn.canBlockSeeSky(entityIn.getPosition().up()))
-            {
-                if (worldIn.rand.nextFloat() <= 0.05F)
-                {
-                	BlockPos pos = entityIn.getPosition();
-                	Random rand = new Random();
-                    stack.setItemDamage(stack.getItemDamage() - 1);
-                    v0id.aw.AetherWorks.proxy.spawnParticleSpark(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + rand.nextFloat(), pos.getZ() + rand.nextFloat(), (rand.nextFloat() - rand.nextFloat()) / 20, rand.nextFloat() / 20, (rand.nextFloat() - rand.nextFloat()) / 20, 0, 0.72F, 0.95F, 1 + rand.nextFloat(), 60);
-                    
-                }
-            }
-        }
-        super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-    }
+	{
+		if (stack.getItemDamage() > 0 && worldIn.getWorldTime() % 24000 >= 15000
+				&& worldIn.getWorldTime() % 24000 <= 21000 && worldIn.canBlockSeeSky(entityIn.getPosition().up())) {
+			if (worldIn.rand.nextFloat() <= 0.05F) {
+				BlockPos pos = entityIn.getPosition();
+				Random rand = new Random();
+				stack.setItemDamage(stack.getItemDamage() - 1);
+				if (!worldIn.isRemote) {
+					v0id.aw.AetherWorks.proxy.spawnParticleSpark(worldIn, pos.getX() + rand.nextFloat(),
+							pos.getY() + rand.nextFloat(), pos.getZ() + rand.nextFloat(),
+							(rand.nextFloat() - rand.nextFloat()) / 20, rand.nextFloat() / 20,
+							(rand.nextFloat() - rand.nextFloat()) / 20, 0, 0.72F, 0.95F, 1 + rand.nextFloat(), 60);
+				}
+			}
+		}
+	}
 	
 	@SubscribeEvent
 	public static void onTake(EmberRemoveEvent event){
@@ -211,8 +215,8 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
                 isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.CHEST)) &&
                 isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.LEGS)) &&
                 isProtectiveCloakPiece(event.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.FEET))) {
-				
 			event.addReduction(0.15);
+			
 			
 			}
 		}
