@@ -41,7 +41,7 @@ public class AetheriumAshenArmor
                //crownBaublizer.init();
                System.out.println("successfully registered Aetherworks Crown as Bauble.");
                MinecraftForge.EVENT_BUS.register(new crownBaublizer());
-               proxy.init(event);
+               //proxy.init(event);
            }
     }
 }
