@@ -1,6 +1,7 @@
 package com.aetheriumashenarmor;
 
 import com.aetheriumashenarmor.items.crownBaublizer;
+import com.aetheriumashenarmor.recipe.AAARecipeRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
@@ -16,7 +17,7 @@ public class AetheriumAshenArmor
 {	
     public static final String MODID = "aetheriumashenarmor";
     public static final String NAME = "Aetherium Ashen Armor";
-    public static final String VERSION = "1.0.1";
+    public static final String VERSION = "1.0.2";
 
     public boolean baublesLoaded;
 

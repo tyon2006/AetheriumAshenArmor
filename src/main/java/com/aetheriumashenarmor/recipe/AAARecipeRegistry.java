@@ -1,5 +1,6 @@
 package com.aetheriumashenarmor.recipe;
 import com.aetheriumashenarmor.init.ModItems;
+import com.aetheriumashenarmor.ConfigManager;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -14,7 +15,6 @@ import v0id.aw.common.fluid.AWFluids;
 
 import teamroots.embers.RegistryManager;
 
-
 @Mod.EventBusSubscriber
 public class AAARecipeRegistry{
 	
@@ -22,22 +22,17 @@ public class AAARecipeRegistry{
 	public static void init(RegistryEvent.Register<IRecipe> event){
 		
 		Ingredient stampBar = Ingredient.fromItem(RegistryManager.stamp_bar);
-		Ingredient ashenGogglesIngredient = Ingredient.fromItem(RegistryManager.ashen_cloak_head);
+		Ingredient ashenGoggles = Ingredient.fromItem(RegistryManager.ashen_cloak_head);
 		Ingredient ashenChestPlate = Ingredient.fromItem(RegistryManager.ashen_cloak_chest);
 		Ingredient ashenLeggings = Ingredient.fromItem(RegistryManager.ashen_cloak_legs);
 		Ingredient ashenBoots = Ingredient.fromItem(RegistryManager.ashen_cloak_boots);
 		
-		FluidStack aetheriumGasFluidStack = new FluidStack(AWFluids.FLUID_AETHERIUM_GAS, 750);
-		ItemStack aetheriumHelmetItemStack = new ItemStack(ModItems.AETHERIUM_ASHEN_HELMET);
-		NBTItemStampingRecipe aetheriumHelmetRecipe = new NBTItemStampingRecipe(ashenGogglesIngredient, aetheriumGasFluidStack,stampBar,aetheriumHelmetItemStack);
-		RecipeRegistry.stampingRecipes.add(aetheriumHelmetRecipe);		
-		
-		//RecipeRegistry.stampingRecipes.add(new ItemStampingRecipe(ashenGoggles, aetheriumGas,stampBar,new ItemStack(ModItems.AETHERIUM_ASHEN_HELMET,1)));
-		
-		RecipeRegistry.stampingRecipes.add(new NBTItemStampingRecipe(ashenChestPlate, new FluidStack(AWFluids.FLUID_AETHERIUM_GAS, 750),stampBar,new ItemStack(ModItems.AETHERIUM_ASHEN_CHESTPLATE,1)));
-		RecipeRegistry.stampingRecipes.add(new NBTItemStampingRecipe(ashenLeggings, new FluidStack(AWFluids.FLUID_AETHERIUM_GAS, 750),stampBar,new ItemStack(ModItems.AETHERIUM_ASHEN_LEGGINGS,1)));
-		RecipeRegistry.stampingRecipes.add(new NBTItemStampingRecipe(ashenBoots, new FluidStack(AWFluids.FLUID_AETHERIUM_GAS, 750),stampBar,new ItemStack(ModItems.AETHERIUM_ASHEN_BOOTS,1)));
-
+		if (ConfigManager.doRegisterStamperRecipe) {
+			FluidStack aetheriumGasFluidStack = new FluidStack(AWFluids.FLUID_AETHERIUM_GAS, ConfigManager.stamperRecipeGasAmount);
+			RecipeRegistry.stampingRecipes.add(new NBTItemStampingRecipe(ashenGoggles, aetheriumGasFluidStack, stampBar, new ItemStack(ModItems.AETHERIUM_ASHEN_HELMET,1)));
+			RecipeRegistry.stampingRecipes.add(new NBTItemStampingRecipe(ashenChestPlate, aetheriumGasFluidStack, stampBar,new ItemStack(ModItems.AETHERIUM_ASHEN_CHESTPLATE,1)));
+			RecipeRegistry.stampingRecipes.add(new NBTItemStampingRecipe(ashenLeggings, aetheriumGasFluidStack, stampBar,new ItemStack(ModItems.AETHERIUM_ASHEN_LEGGINGS,1)));
+			RecipeRegistry.stampingRecipes.add(new NBTItemStampingRecipe(ashenBoots, aetheriumGasFluidStack, stampBar,new ItemStack(ModItems.AETHERIUM_ASHEN_BOOTS,1)));
+		}
 	}
-
 }
