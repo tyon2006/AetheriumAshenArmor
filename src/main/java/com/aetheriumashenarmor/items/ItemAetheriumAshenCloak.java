@@ -37,6 +37,7 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 	public ItemAetheriumAshenCloak(ArmorMaterial material, int reduction, EntityEquipmentSlot slot) {
 		super(material, reduction, slot, "aetherium_ashen_cloak", true);
 	}
+	
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -50,6 +51,7 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 		return new ModelAshenCloak(slot);
 	}
 
+	
 	@Override
 	public int getGemSlots(ItemStack holder) {
 		return 7;
@@ -107,12 +109,12 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 		return stacks;
 	}
 
-	/*
+	
 	@Override
 	public void setDamage(ItemStack stack, int damage) {
 		super.setDamage(stack, Math.min(damage,getMaxDamage(stack) - 1));
 	}
-	*/
+	
 
 	private boolean isBroken(ItemStack armor) {
 		return armor.getItemDamage() >= armor.getMaxDamage() - 1;
@@ -188,13 +190,15 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
     
-	//@SideOnly(Side.CLIENT) //does this need to be here for this method? iunno
+	//@SideOnly(Side.CLIENT) //does this need to be here for this method? iunno //dont need it because hte particle check is remote
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		if (stack.getItemDamage() > 0 && worldIn.getWorldTime() % 24000 >= 15000
-				&& worldIn.getWorldTime() % 24000 <= 21000 && worldIn.canBlockSeeSky(entityIn.getPosition().up())) {
-			if (worldIn.rand.nextFloat() <= 0.05F) {
+		if (stack.getItemDamage() > 0 
+				&& worldIn.getWorldTime() % 24000 >= 15000
+				&& worldIn.getWorldTime() % 24000 <= 21000 
+				&& worldIn.canBlockSeeSky(entityIn.getPosition().up())) {
+			if (worldIn.rand.nextFloat() <= 0.04F) {
 				BlockPos pos = entityIn.getPosition();
 				Random rand = new Random();
 				stack.setItemDamage(stack.getItemDamage() - 1);

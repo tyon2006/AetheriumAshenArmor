@@ -1,4 +1,5 @@
 package com.aetheriumashenarmor.items;
+import v0id.aw.common.creativetabs.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -36,7 +37,7 @@ public class ItemArmorBase extends ItemArmor implements IModeledItem {
 		this.setRegistryName("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
 		//System.out.println("aetheriumashenarmor:"+getUnlocalizedName().substring(5));
 		if (addToTab){
-			setCreativeTab(CreativeTabs.COMBAT);
+			setCreativeTab(AWTabs.TAB_AW);
 		}
 	}
 	

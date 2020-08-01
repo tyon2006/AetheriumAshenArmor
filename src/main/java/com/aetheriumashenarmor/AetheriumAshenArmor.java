@@ -1,6 +1,7 @@
 package com.aetheriumashenarmor;
 
 import com.aetheriumashenarmor.items.crownBaublizer;
+import com.aetheriumashenarmor.proxy.ClientProxy;
 import com.aetheriumashenarmor.recipe.AAARecipeRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -8,6 +9,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -21,6 +23,9 @@ public class AetheriumAshenArmor
 
     public boolean baublesLoaded;
 
+    @SidedProxy(clientSide = "com.aetheriumashenarmor.proxy.ClientProxy", serverSide = "com.aetheriumashenarmor.proxy.CommonProxy")
+    public static ClientProxy proxy;
+    
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 
@@ -33,9 +38,10 @@ public class AetheriumAshenArmor
     {
     	   if (Loader.isModLoaded("baubles") && ConfigManager.doBaublizeCrown == true) {
                baublesLoaded = true;
-               crownBaublizer.init();
+               //crownBaublizer.init();
                System.out.println("successfully registered Aetherworks Crown as Bauble.");
                MinecraftForge.EVENT_BUS.register(new crownBaublizer());
+               proxy.init(event);
            }
     }
 }

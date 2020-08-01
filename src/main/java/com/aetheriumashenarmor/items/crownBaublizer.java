@@ -1,4 +1,5 @@
 package com.aetheriumashenarmor.items;
+import v0id.aw.common.item.AWItems;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -24,7 +25,6 @@ import net.minecraft.potion.PotionType;
 import net.minecraft.init.MobEffects;
  
 import net.minecraftforge.common.util.Constants;
-import v0id.aw.common.item.*;
 
 public class crownBaublizer {
 	
@@ -89,6 +89,7 @@ public class crownBaublizer {
                     return capability == BaublesCapabilities.CAPABILITY_ITEM_BAUBLE ? BaublesCapabilities.CAPABILITY_ITEM_BAUBLE.cast(awcrown) : null;
                 }
             });
+
         } 
     }
 }
