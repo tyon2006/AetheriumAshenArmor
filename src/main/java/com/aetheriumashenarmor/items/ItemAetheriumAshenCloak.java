@@ -27,7 +27,7 @@ import teamroots.embers.api.event.EmberRemoveEvent;
 import teamroots.embers.api.item.IInflictorGem;
 import teamroots.embers.api.item.IInflictorGemHolder;
 import teamroots.embers.api.item.IInfoGoggles;
-
+import teamroots.embers.model.ModelAshenArmor;
 import teamroots.embers.model.ModelAshenCloak;
 import v0id.aw.AetherWorks;
 
@@ -48,7 +48,8 @@ public class ItemAetheriumAshenCloak extends ItemArmorBase implements IInflictor
 	@SideOnly(Side.CLIENT)
 	@Override
 	public ModelBiped getArmorModel(EntityLivingBase living, ItemStack stack, EntityEquipmentSlot slot, ModelBiped _default){
-		return new ModelAshenCloak(slot);
+		//return new ModelAshenCloak(slot);
+		return new ModelAshenArmor(slot);
 	}
 
 	
