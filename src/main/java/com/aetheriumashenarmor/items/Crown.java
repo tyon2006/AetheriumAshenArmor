@@ -2,26 +2,35 @@ package com.aetheriumashenarmor.items;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.ResourceLocation;
+import v0id.aw.common.item.AWItems;
 import v0id.aw.lib.AWConsts;
 
-public class Crown extends ModelBase{
+public class Crown extends ModelBiped{
 	
-	protected static final ResourceLocation crownTexture = new ResourceLocation (AWConsts.modid + ":textures/items/aether_crown.png");
+	protected static final ResourceLocation crownTexture = new ResourceLocation (AWConsts.modid + ":textures/armor/aether_crown.png");
 	public ModelRenderer Crown;
 	
 	public Crown() {
-		this.textureWidth = 32;
-		this.textureHeight = 32;
-		this.Crown = new ModelRenderer(this, 1, 0);
-		this.Crown.setRotationPoint(1.0F, 0.0F, 1.0F);
-		this.Crown.addBox(-1.0F, -0.0F, -4.05F, 2, 2, 1, 1.0F);
+		this.textureWidth = 128;
+		this.textureHeight = 64;
+		this.Crown = new ModelRenderer(this, 73, 15);
+
+		this.Crown.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		this.Crown.addBox(-1.0f, -5.0f, -1.0F, 32, 7, 12, 0.5f);
+		this.bipedHead.addChild(Crown);
+		//this.Crown.addBox(0.0F, 0.0F, 0.0F, 32, 7, 0, 0.5f);
 	}
 	@Override
 	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(crownTexture);
+		//ModelBiped mb = new net.minecraft.client.model.ModelBiped();
+		//AWItems.CROWN.getArmorModel(entityIn, new v0id.aw.common.item.AWCrown().getItemStackDisplayName(), EntityEquipmentSlot.HEAD, mb);
 		//System.out.print(crownTexture.toString());
 		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
 		this.Crown.render(1);
