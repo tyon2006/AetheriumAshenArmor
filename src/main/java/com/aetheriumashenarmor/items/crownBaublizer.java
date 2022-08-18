@@ -89,7 +89,6 @@ public class crownBaublizer {
                     return capability == BaublesCapabilities.CAPABILITY_ITEM_BAUBLE ? BaublesCapabilities.CAPABILITY_ITEM_BAUBLE.cast(awcrown) : null;
                 }
             });
-
         } 
     }
 }

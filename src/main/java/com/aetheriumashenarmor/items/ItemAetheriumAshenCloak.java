@@ -28,7 +28,6 @@ import teamroots.embers.api.item.IInflictorGem;
 import teamroots.embers.api.item.IInflictorGemHolder;
 import teamroots.embers.api.item.IInfoGoggles;
 import teamroots.embers.model.ModelAshenArmor;
-import teamroots.embers.model.ModelAshenCloak;
 import v0id.aw.AetherWorks;
 
 @Mod.EventBusSubscriber

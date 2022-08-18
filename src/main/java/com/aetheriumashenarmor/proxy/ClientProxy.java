@@ -1,25 +1,15 @@
 package com.aetheriumashenarmor.proxy;
 
-import java.util.Map;
-
-import com.aetheriumashenarmor.items.crownBaubleRenderer;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 public class ClientProxy extends CommonProxy{
 	
+	/* Uncomment this when crown renderer code is complete
 	public static RenderPlayer render;
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void init(FMLInitializationEvent event) {
 
-		if(Side.CLIENT.isClient()) {
+		if(ConfigManager.doRenderBaublizedCrown == true) {
 	        Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
 			RenderPlayer render;
 			render = skinMap.get("default");
@@ -31,5 +21,6 @@ public class ClientProxy extends CommonProxy{
 			super.init(event);
 		}
 	}
+	*/
 }
 
